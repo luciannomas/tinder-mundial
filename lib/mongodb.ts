@@ -1,11 +1,5 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
-
-if (!MONGODB_URI) {
-  throw new Error("Please define MONGODB_URI in your .env.local file");
-}
-
 interface MongooseCache {
   conn: typeof mongoose | null;
   promise: Promise<typeof mongoose> | null;
@@ -18,6 +12,14 @@ const cached: MongooseCache = globalWithMongoose.mongoose ?? { conn: null, promi
 globalWithMongoose.mongoose = cached;
 
 async function dbConnect(): Promise<typeof mongoose> {
+  const MONGODB_URI = process.env.MONGODB_URI;
+
+  if (!MONGODB_URI) {
+    throw new Error(
+      "MONGODB_URI no configurada. Agregala en las variables de entorno de Vercel o en .env.local"
+    );
+  }
+
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {

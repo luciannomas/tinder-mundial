@@ -1,0 +1,47 @@
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+export function getDistanceKm(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+): number {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+export function formatDistance(km: number): string {
+  if (km < 1) return "< 1 km";
+  if (km < 10) return `${km.toFixed(1)} km`;
+  return `${Math.round(km)} km`;
+}
+
+export function computeMatchStickers(
+  myHave: string[],
+  myNeed: string[],
+  theirHave: string[],
+  theirNeed: string[]
+) {
+  // What I can give them (I have repeated AND they need)
+  const iCanGive = myHave.filter((s) => theirNeed.includes(s));
+  // What they can give me (they have repeated AND I need)
+  const theyCanGive = theirHave.filter((s) => myNeed.includes(s));
+
+  const isPerfect = iCanGive.length > 0 && theyCanGive.length > 0;
+  const isPartial =
+    !isPerfect && (iCanGive.length > 0 || theyCanGive.length > 0);
+
+  return { iCanGive, theyCanGive, isPerfect, isPartial };
+}

@@ -15,8 +15,9 @@ npm run dev   # http://localhost:3000
 
 ## Video del Home
 
-Cuando tengas el video, poné su URL en `NEXT_PUBLIC_HOME_VIDEO_URL`
-(en `.env.local` o en Vercel → Environment Variables). Si está vacío se muestra el placeholder.
+El video está en `public/video/torneo-leyendas.mp4` (con su portada `torneo-leyendas-poster.jpg`).
+Para usar otro video sin tocar código, poné su URL en `NEXT_PUBLIC_HOME_VIDEO_URL`
+(en `.env.local` o en Vercel → Environment Variables).
 
 ## Deploy en Vercel
 

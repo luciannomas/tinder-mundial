@@ -9,7 +9,11 @@ const TICKER = [
 ];
 
 export default function Home() {
-  const videoUrl = process.env.NEXT_PUBLIC_HOME_VIDEO_URL || undefined;
+  const videoUrl =
+    process.env.NEXT_PUBLIC_HOME_VIDEO_URL || "/video/torneo-leyendas.mp4";
+  const posterUrl = process.env.NEXT_PUBLIC_HOME_VIDEO_URL
+    ? undefined
+    : "/video/torneo-leyendas-poster.jpg";
 
   return (
     <main className="pitch">
@@ -43,7 +47,7 @@ export default function Home() {
       </section>
 
       <section className="video-section">
-        <VideoSlot src={videoUrl} />
+        <VideoSlot src={videoUrl} poster={posterUrl} />
       </section>
 
       <section className="teams">

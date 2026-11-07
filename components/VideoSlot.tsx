@@ -1,9 +1,16 @@
-export default function VideoSlot({ src }: { src?: string }) {
+export default function VideoSlot({ src, poster }: { src?: string; poster?: string }) {
   return (
     <div className="screen">
       <div className="screen-inner">
         {src ? (
-          <video src={src} controls playsInline preload="metadata" className="screen-video" />
+          <video
+            src={src}
+            poster={poster}
+            controls
+            playsInline
+            preload="metadata"
+            className="screen-video"
+          />
         ) : (
           <div className="screen-placeholder">
             <div className="play">
@@ -16,9 +23,11 @@ export default function VideoSlot({ src }: { src?: string }) {
           </div>
         )}
       </div>
-      <div className="screen-live">
-        <span className="dot" /> {src ? "EN VIVO" : "PRÓXIMAMENTE"}
-      </div>
+      {!src && (
+        <div className="screen-live">
+          <span className="dot" /> PRÓXIMAMENTE
+        </div>
+      )}
     </div>
   );
 }

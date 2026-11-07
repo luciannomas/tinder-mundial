@@ -2,6 +2,8 @@
 
 Home "Coming soon" del torneo (A, B, Los Papus, Tercero, Auxi, Matadores).
 
+🌐 **En vivo:** https://torneoleyendas.vercel.app/
+
 - **Next.js 15 + TypeScript** (App Router)
 - **Vercel** para el deploy
 - Próxima etapa: **MongoDB Atlas** (datos) + **Vercel Blob** (videos/fotos)
